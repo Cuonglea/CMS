@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>CMS</title>
+	<link rel="stylesheet" type="text/css" href="Css/style.css">
+	<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js' type='text/javascript'></script>
+	<!-- Khai báo địa chỉ của thư viện JQuery -->
+	<script type='text/javascript'>
+		// Java scroll to top
+
+		$(function () {
+			$.fn.scrollToTop = function () {
+				$(this).hide().removeAttr("href");   // Xóa thuộc tính "href" trong phần HTML
+				if ($(window).scrollTop() != "0") { $(this).fadeIn("slow") }
+				var scrollDiv = $(this);
+				$(window).scroll(function () {   // Sự kiện trượt trang web
+					if ($(window).width() < 1100) {
+						$(".toTop").hide();
+						return;
+					}
+					if ($(document).scrollTop() < $(window).height()) {
+						$(".toTop").fadeOut("slow");   // ẩn nút
+					} else {
+						$(".toTop").fadeIn("slow");    // Hiện nút
+					}
+				});
+				$(this).click(function () { // Sự kiện click nút
+					$("html, body").animate({ scrollTop: 0 }, "slow")   // Tạo hiệu ứng chuyển mượt
+				})
+			}
+		});
+		$(function () { $(".toTop").scrollToTop(); });
+
+		// Khi resize cửa sổ trình duyệt
+		$(window).resize(function () {
+			if ($(window).width() < 1100) {
+				$(".toTop").hide();
+				return;
+			}
+		});
+	</script>
+</head>
+<body> 
+	<a class='toTop' href='#toTop' title='Lên trên'></a>
+		<body>
+			<div id="menutop"> 
+				<ul>
+					<li> <a href="#" title="Trang chủ"> Trang chủ</a></li>
+					<li> <a href="#" title="Tạo cuộc thi"> Tạo cuộc thi</a></li>
+					<li> <a href="#" title="Danh sách thí sinh"> Danh sách thí sinh</a></li>
+					<li> <a href="#" title=" Kết quả"> Kết quả</a></li>
+					<li> <a href="#" title="Bảng xếp hạng"> Bảng xếp hạng</a></li>
+					<li> <a href="#" title="Hướng dẫn sử dụng"> Hướng dẫn sử dụng</a></li>
+				</ul>
+			</div>
+			<div id="banner">
+				<img src="jpg/bn.png" style="width: 1000px; height: 300px;"> 
+			</div>
+<!-- ----------------------------------------------------------------------------------------------------------------------------- -->
+			<div id="main">
+				<div id="left">
+					<ul>
+						<li>
+							<p>Hệ thống chấm thi CMS (Contest Management System) là một hệ thống chấm bài mã nguồn mở được sử dụng trong nhiều kỳ thi lập trình quốc tế.
+CMS có thể được tiến hành kiểm tra lập trình trên các ngôn ngữ: Java, Pascal, C, C++, C#, Python2, Python3, Rust, Haskell.
+Để vận hành một cuộc thi trên hệ thống chấm thi CMS cần thực hiện các bước sau:
+</p>
+							<h2 id="C1">1. Chuẩn bị tài nguyên cho cuộc thi</h2>
+							<p> − Làm đề và bộ test <br>
+&ensp;+ Tạo các câu hỏi cho cuộc thi, các câu hỏi phải được định dạng .pdf <br>
+&ensp;+ Bộ test: Tương ứng với mỗi câu hỏi là 1 bộ test, trong đó mỗi một test bao gồm dữ liệu vào được bắt đầu input0, input1, …,và dữ liệu ra được bắt đầu output0, output1, … <br>
+− Tạo danh sách thí sinh thi:<br>
+&ensp;+ Tạo trên bảng tính excel gồm các trường thông tin: Username, FirstName, LastName, Email, Password.</p>
+						</li>
+<!-- ----------------------------------------------------------------------------------------------------------------------------- -->
+						<li>
+							<h2 id="C2">2. Cấu hình cuộc thi của ban tổ chức</h2>
+							<h2 id="C21">&ensp; 2.1.	Tạo cuộc thi</h2>
+							<p>Trang web dành cho người quản trị có dạng địa chỉ IP:8889, ví dụ : <a href="url">http://127.0.0.1:8889/ </a></p>
+							<img src="jpg/taodethi.png" style="width:600px">
+							<p>Để thêm một cuộc thi mới, ấn chuột vào “create new contest trong bảng bên trái, cửa sổ mới sẽ hiện ra như sau:<br>
+								Địa chỉ : <a href="url"> http:// 127.0.0.1:8889/contest/add </a></p>
+								<img src="jpg/name.png" style="width:600px">
+								<p>Name: Đặt tên cho cuộc thi sau đó chọn nút “Gửi”</p>
+								<img src="jpg/cauhinh.png" style="width:500px; height:350px">
+								<p>Trong bảng cấu hình bên tay trái, ban tổ chức có thể cấu hình nhiều thông số.<br>
+								Các thông số này sẽ là giá trị ngầm định cho mọi bài toán (task).<br>
+								 Nếu task nào yêu cầu khác, có thể cấu hình riêng cho từng task. Giá trị thông số cấu hình riêng sẽ được áp dụng cho riêng task đó.  Các thông số không được cấu hình (không có giá trị) sẽ nhận giá trị ngầm định của hệ thống. Bảng ý nghĩa của các thông số được liệt kê như sau :</p>\
+								<img src="jpg/nn.png" style="width: 600px">
+<!-- ----------------------------------------------------------------------------------------------------------------------------- -->
+								<li>
+									<h2 id="C22">2.2. Tạo câu hỏi</h2>
+									<p>Để thêm câu hỏi mới truy cập vào địa chỉ <a href="url">http:// 127.0.0.1:8889/contest/task</a></p>
+									<img src="jpg/task.png" style="width: 500px;">
+									<p>Sau đó đặt tên cho bài toán và nhấn nút “Gửi”</p>
+									<img src="jpg/submit.png">
+									<p>Trong đó có các thông số trong cấu hình bài toán cần quan tâm:</p>
+<div id="vb">
+<p>	<i>								
++ Name: Tên hiển thị<br>
++ Title: tiêu đề<br>
++ Statements: Nội dung của tệp đề bài đính kèm (định dạng tệp dưới dạng .pdf)<br>
++ Limits: Giới hạn<br>
++ Maximum number of submissions: Số lần nộp bài tối đa<br>
++ Maximum number of user tests: Số lần test thử tối đa<br>
++ Minimum interval between submissions: Khoảng thời gian tối thiểu giữa mỗi lần nộp<br>
++ Minimum interval between user tests: Khoảng thời gian tối thiểu giữa mỗi lần test thử<br>
++ Score decimal places: Cách định dạng của điểm<br>
++ Time limit: Giới hạn thời gian<br>
++ Memory limit: Giới hạn về bộ nhớ<br>
++ Task type: Batch (bài thí sinh sẽ chấm lần lượt với 1 bộ input output)<br>
++ Input file: tên file input, để trống nếu chọn đầu vào nhập từ bàn phím<br>
++ Output file: tên file output, để trống nếu chọn đầu ra hiển thị lên màn hình<br>
++ Score Type: Sum (Tổng điểm của các bộ test)<br>
++ Score Parameters: Điểm của mỗi bộ test
+</i>
+</p>
+</div>
+			<p>Tiếp theo, chọn “<i>Add a test case</i>” để đưa bộ test vào hệ thống</p>
+			<img src="jpg/upload.png" style="width: 500px;">
+<div id="vb">
+	<p>Codename: vị trí của bộ test, bắt đầu đánh từ số 0 <br>
+Input: đường dẫn đến input<br>
+Output: đường dẫn đến output<br>
+Public: có đánh dấu, công khai bộ test<br>
+Sau khi chọn xong, ấn nút Upload để hoàn thành.
+</p>
+</div>
+<!-- ----------------------------------------------------------------------------------------------------------------------------- -->
+</li>
+<h2 id="C23">2.3. Tạo danh sách thí sinh</h2>
+<p>Để thêm thí sinh mới truy cập vào địa chỉ:<a href="url"> http:// 127.0.0.1:8889/user/them user/</a></p>
+<img src="jpg/admin.png" style="width: 500px; height: auto;">
+<p>Chọn <i>“Import từ Excel”</i> rồi nhấn nút “Gửi”.</p>
+</li>
+<li>
+	<h2 id="C24">2.4. Vận hành cuộc thi</h2>
+	<h2 id="C241">2.4.1. Import các câu hỏi vào cuộc thi</h2>
+	<p>Để import các câu hỏi vào cuộc thi mới truy cập vào địa chỉ <a href="url">http:// 127.0.0.1:8889/ contest/1/tasks</a></p>
+	<img src="jpg/test.png">
+	<p>Sau đó ấn vào “Add task”</p>
+	<h2 id="C242">2.4.2. Import danh sách thí sinh vào cuộc thi</h2>
+	<p>Để import thí sinh vào cuộc thi mới truy cập vào địa chỉ <a href="url">http:// 127.0.0.1:8889/ contest/1/users</a></p>
+	<img src="jpg/import.png" style="width: 400px">
+	<p>Sau đó ấn nút “Add user”</p>
+	<h2 id="C243">2.4.3. Khởi chạy cuộc thi</h2>
+	<p>Người quản trị viên khởi chạy dịch vụ ContestWebServer để thí sinh đăng nhập vào để lấy đề và gửi bài.</p>
+</li> 
+<!-- ----------------------------------------------------------------------------------------------------------------------------- -->
+<li>
+	<h2 id="C3">3. Hướng dẫn thí sinh làm bài trên hệ thống</h2>
+	<h2 id="C31">3.1. Đăng nhập hệ thống</h2>
+	<img src="jpg/dangnhap.png">
+	<p>1. Đầu tiên, các bạn vào địa chỉ http://hnmucms.camdvr.org hoặc <a href="url">http://14.162.209.87</a></p>
+	<p>2. Sau đó đăng nhập <br> 
+o	Tên đăng nhập: Số báo danh <br>
+o	Mật khẩu: Được gửi qua email cá nhân của thí sinh
+<p>3. Bạn có thể lựa chọn ngôn ngữ ở nút góc trên bên phải nếu muốn.</p>
+</p>
+<!-- ----------------------------------------------------------------------------------------------------------------------------- -->
+<li> 
+	<h2 id="C32">3.2. Tham gia cuộc thi</h2>
+	<p>Tương tự lúc đăng kí tham gia cuộc thi, khi cuộc thi bắt đầu tính thời gian làm bài, ở phía bên phải của trang sẽ hiển thị phần Cuộc thi đang diễn ra. Các bạn nhấn vào nút Tham gia ngay để bắt đầu làm bài</p>
+	<img src="jpg/contest.png">
+	<h2 id="C33">3.3. Thí sinh xem thông tin tổng quan về cuộc thi</h2>
+	<img src="jpg/tongquan.png">
+	<p>Trên màn hình tổng quan về cuộc thi có các thông tin sau: <br>
+1.	Tên cuộc thi<br>
+2.	Thời gian còn lại (giờ: phút: giây)<br>
+3.	Nút đăng xuất<br>
+4.	Danh sách các bài tập trong kỳ thi<br>
+5.	Thông tin thời điểm bắt đầu và kết thúc<br>
+<h2 id="C34">3.4. Đặt câu hỏi với Ban Tổ Chức</h2>
+<img src="jpg/ask.png" style="width: 700px">
+<p>Chức năng này chỉ hiển thi khi được cho phép
+Thí sinh có thể vào phần Communication và đặt câu hỏi với Ban tổ chức. </p>
+<h2 id="C35">3.5. Thông tin về một bài tập trong cuộc thi</h2>
+<img src="jpg/thongtinthi.png" style="width: 700px">
+<p>Với mỗi bài tập trong cuộc thi (ở phần bên trái của màn hình), nhấn vào Statement để tải đề bài và xem thông tin của bài.</p>
+<p>Trên màn hình thông tin của mỗi bài của thông tin sau: <br>
+1. Menu Statement của bài
+2. Tên bài tập
+3. Nút tải đề bài
+4. Giới hạn thời gian, giới hạn bộ nhớ, và lệnh biên dịch với mỗi ngôn ngữ</p>
+<h2 id="C36">3.6. Nộp bài và xem kết quả</h2>
+<img src="jpg/nopbai.png" style="width: 700px">
+<div id="vb">
+<p>1. Nhấn vào Submissions của bài tập để nộp bài <br>
+2. Chọn file mã nguồn và nhấn nút Submit để nộp bài<br>
+3. Có thể nhấn vào nút Download để tải về lại mã nguồn đã nộp<br>
+4. Nhấn vào details để xem thông tin chi tiết về kết quả của bài làm
+</p>
+</div>
+<p>Thí sinh có thể xem kết quả chi tiết bài làm của mình.</p>
+<p>Kết quả mỗi lần nộp bài: Nếu có lỗi cú pháp hệ thống sẽ báo lỗi biên dịch. Nếu chương trình chạy thành công sẽ hiển thị điểm đạt được trong tổng số 50 điểm tối đa cho mỗi bài (kết quả tính theo % số test đúng).</p>
+<p>Trong ví dụ trên, bài làm của thí sinh đạt được 50/50 điểm (đúng hoàn toàn các bộ test).</p>
+<p>Ví dụ: Kết quả chi tiết của bài làm.</p>
+<img src="jpg/ketqua.png" style="width:700px">
+<p>Ví dụ: Kết quả của trình biên dịch</p>
+<img src="jpg/kqbiendich.png" style="width:700px">
+<p>BTC sẽ giới hạn thời gian tối thiếu giữa 2 lần gửi bài liên tiếp là 60 giây để tránh hiện tượng spam. Nếu các bạn submit liên tục sẽ nhận được thông báo như hình bên dưới</p>
+<img src="jpg/thongbao.png" style="width: 300px">
+
+<h2 id="C37">3.7. Một số phản hồi của hệ thống khi thí sinh nộp bài</h2>
+<p>Một số thông báo có thể gặp khi biên dịch bài làm:</p>
+<img src="jpg/phanhoi.png" style="width:700px">
+</li>
+<!-- ----------------------------------------------------------------------------------------------------------------------------- -->
+
+<li>
+	<h2 id="C4">4. Bảng xếp hạng </h2>
+	<p>(<a href="url">link http://hnmucms.camdvr.org:8080/contest/2/ranking_ph </a>
+hoặc <a href="url">http://14.162.209.87:8080/contest/2/ranking_ph </a>)</p>
+	
+</li>
+					</ul>
+				</div>
+				<div id="right" >
+					<div class="menu_right" id="mymenu">
+					<h3>NỘI DUNG</h3>
+					<div class="content">
+					<ul>
+						<li><a href="#C1">1. Chuẩn bị tài nguyên cho cuộc thi</li>
+							<li><a href="#C2">2.Cấu hình cuộc thi của ban tổ chức</li>
+							<li><a href="#C21">2.1.Tạo cuộc thi</a></li>
+							<li><a href="#C22">2.2.Tạo câu hỏi</a></li>
+							<li><a href="#C23">2.3.Tạo danh sách thí sinh</a></li>
+							<li><a href="#C24">2.4.Vận hành cuộc thi</a></li>
+							<li><a href="#C241">2.4.1.Import các câu hỏi vào cuộc thi</a></li>
+							<li><a href="#C242">2.4.2.Import danh sách thí sinh vào cuộc thi</a></li>
+							<li><a href="#C243">2.4.3.Khởi chạy cuộc thi</a></li>
+							<li><a href="#C3">3.Hướng dẫn thí sinh làm bài trên hệ thống</a></li>
+							<li><a href="#C31">3.1.Đăng nhập hệ thống</a></li>
+							<li><a href="#C32">3.2.Tham gia cuộc thi</a></li>
+							<li><a href="#C33">3.3.Thí sinh xem thông tin tổng quan về cuộc thi</a></li>
+							<li><a href="#C34">3.4.Đặt câu hỏi với Ban Tổ Chức</a></li>
+							<li><a href="#C35">3.5.Thông tin về một bài tập trong cuộc thi</a></li>
+							<li><a href="#C36">3.6.Nộp bài và xem kết quả</a></li>
+							<li><a href="#C37">3.7.Một số phản hồi của hệ thống khi thí sinh nộp bài</a></li>
+							<li><a href="#C4">4. Bảng xếp hạng</a></li>
+					</ul>
+				</div>
+				</div>
+<script>
+window.onscroll = function() {myFunction()};
+
+var header = document.getElementById("mymenu");
+var sticky = header.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+  } else {
+    header.classList.remove("sticky");
+  }
+}
+</script>
+				// <!-- <div id="footer">Footer</div> -->
+		</body>
+</body>
+</html>
